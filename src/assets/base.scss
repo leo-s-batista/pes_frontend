@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --mobile-navbar-height: 0;
+    --desktop-navbar-height: 0;
+}
+
+.page-enter-active,
+.page-leave-active {
+    transition: all 0.3s;
+}
+
+.page-enter {
+    opacity: 0;
+    will-change: transform opacity;
+}
+
+.page-leave-to {
+    opacity: 0;
+    will-change: transform opacity;
+}
+
+@screen lg{
+    .page-enter {
+        opacity: 0;
+        will-change: opacity;
+    }
+    .page-leave-to {
+        opacity: 0;
+        will-change: opacity;
+    }
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+img.lazy {
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.8s,height 0.5s;
+}
+
+img.lazy.upper[lazy='loading'] {
+    opacity: 0;
+    transform: translateY(300px);
+}
+
+img[lazy='loading'] {
+    opacity: 0;
+    transform: translateY(0);
+}
+
+img[lazy='error'] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+img[lazy='loaded'] {
+    opacity: 1;
+    transform: translateY(0);
+}
