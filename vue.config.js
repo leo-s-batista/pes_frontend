@@ -5,7 +5,7 @@ module.exports = defineConfig({
     config
       .plugin('html')
       .tap(args => {
-        args[0].title = process.env.VUE_APP_TITLE;
+        args[0].title = 'PES 1 - Frontend';
         return args;
       });
  }

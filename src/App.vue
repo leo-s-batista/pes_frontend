@@ -1,7 +1,9 @@
 <template>
   <div class="layout">
     <CustomMenu />
-    <router-view />
+    <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
     <CustomFooter />
   </div>
 </template>

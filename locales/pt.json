@@ -1,3 +1,44 @@
 {
-    
+    "routes.home": "/",
+    "routes.voluntarios": "/voluntarios",
+    "routes.pessoas_atendidas": "/pessoas-atendidas",
+
+    "navbar.home": "Home",
+    "navbar.voluntarios": "Voluntários",
+    "navbar.pessoas_atendidas": "Pessoas atendidas",
+
+    "voluntarios.title": "Gerenciar Voluntários",
+    "voluntarios.add": "Adicionar",
+    "voluntarios.order_by": "Ordenar por",
+    "voluntarios.search": "Pesquisar",
+    "voluntarios.search.placeholder": "Pesquisar por nome ou CPF",
+
+    "voluntarios.modal.title.add": "Adicionar Voluntário",
+    "voluntarios.modal.title.edit": "Editar Voluntário",
+
+    "voluntarios.form.status": "Status",
+    "voluntarios.form.nome": "Nome",
+    "voluntarios.form.cpf": "CPF",
+    "voluntarios.form.email": "Email",
+    "voluntarios.form.senha": "Senha",
+    "voluntarios.form.telefone": "Telefone",
+    "voluntarios.form.data_cadastro": "Data de Cadastro",
+
+    "pessoasAtendidas.title": "Gerenciar Pessoas Atendidas",
+    "pessoasAtendidas.add": "Adicionar",
+    "pessoasAtendidas.order_by": "Ordenar por",
+    "pessoasAtendidas.search": "Pesquisar",
+    "pessoasAtendidas.search.placeholder": "Pesquisar por nome ou CPF",
+
+    "pessoasAtendidas.modal.title.add": "Adicionar Pessoa Atendida",
+    "pessoasAtendidas.modal.title.edit": "Editar Pessoa Atendida",
+
+    "pessoasAtendidas.form.status": "Status",
+    "pessoasAtendidas.form.nome": "Nome",
+    "pessoasAtendidas.form.cpf": "CPF",
+    "pessoasAtendidas.form.data_nascimento": "Data de Nascimento",
+    "pessoasAtendidas.form.genero": "Gênero",
+    "pessoasAtendidas.form.telefone": "Telefone",
+    "pessoasAtendidas.form.observacoes": "Observações",
+    "pessoasAtendidas.form.data_cadastro": "Data de Cadastro"
 }

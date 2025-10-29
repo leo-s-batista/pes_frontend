@@ -36,34 +36,58 @@
 }
 
 .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
+    transition: opacity .3s;
 }
 
 .fade-enter, .fade-leave-to {
     opacity: 0;
 }
 
-img.lazy {
-    opacity: 0;
-    transition: opacity 0.3s, transform 0.8s,height 0.5s;
+button {
+    @apply flex items-center gap-x-1 bg-primary text-white px-2 py-2 rounded-lg shadow-sm transition-all duration-300 ease-in-out; 
+    span {
+        @apply text-sm;
+    }
+    svg {
+        @apply text-sm;
+    }
+
+    &.danger {
+        @apply bg-red-600 text-white;
+
+        &:hover {
+            @apply bg-red-700;
+        }
+    }
+
+    &:hover {
+        @apply bg-primary-dark shadow;
+        transform: scale(0.98);
+    }
 }
 
-img.lazy.upper[lazy='loading'] {
-    opacity: 0;
-    transform: translateY(300px);
+input, select, textarea {
+    @apply px-3 py-2 rounded-lg shadow-sm bg-transparent outline-none w-full;
+    border: 1px solid #ccc;
+    &::placeholder {
+        @apply text-sm;
+        color: #ccc;
+    }
 }
 
-img[lazy='loading'] {
-    opacity: 0;
-    transform: translateY(0);
+.el-input__inner {
+    @apply text-black;
 }
 
-img[lazy='error'] {
-    opacity: 1;
-    transform: translateY(0);
+.el-time-panel__footer {
+    @apply flex justify-center items-center gap-x-2;
 }
 
-img[lazy='loaded'] {
-    opacity: 1;
-    transform: translateY(0);
+.el-date-editor {
+    width: 100% !important; 
+    
+    input {
+        border: 1px solid #ccc !important;
+        @apply rounded-lg shadow-sm bg-transparent outline-none #{!important};
+    }
 }
