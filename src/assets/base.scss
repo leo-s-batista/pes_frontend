@@ -91,3 +91,29 @@ input, select, textarea {
         @apply rounded-lg shadow-sm bg-transparent outline-none #{!important};
     }
 }
+
+.el-popover {
+    @apply bg-white rounded-lg shadow-lg p-4;
+}
+
+.el-popconfirm {
+
+    .el-button {
+        @apply p-2;
+
+        &.el-button--text {
+            @apply text-red-500 border-none bg-red-100;
+        }
+
+        &.el-button--primary {
+            @apply bg-primary text-white border-none; 
+        }
+    }
+
+    .el-popconfirm__main {
+        @apply pb-6;
+    }
+    .el-popconfirm__icon {
+        @apply mr-2;
+    }
+}

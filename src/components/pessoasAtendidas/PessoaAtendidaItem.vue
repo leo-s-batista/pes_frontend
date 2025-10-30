@@ -26,14 +26,25 @@
                 <font-awesome-icon icon="edit" />
                 <span>Editar</span>
             </button>
-            <button class="danger" @click="remove()">
+            <button class="danger">
                 <template v-if="loading.delete">
                     <font-awesome-icon icon="circle-notch" spin />
                     <span>Apagando</span>
                 </template>
                 <template v-else>
-                    <font-awesome-icon icon="trash" />
-                    <span>Apagar</span>
+                    <el-popconfirm
+                        confirm-button-text='Sim'
+                        cancel-button-text='Cancelar'
+                        icon="el-icon-warning"
+                        icon-color="red"
+                        title="Tem certeza que deseja excluir este registro?"
+                        @confirm="remove()"
+                    >
+                        <div slot="reference">
+                            <font-awesome-icon icon="trash" />
+                            <span>Apagar</span>
+                        </div>
+                    </el-popconfirm>
                 </template>
             </button>
         </td>
