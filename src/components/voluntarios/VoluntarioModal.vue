@@ -40,7 +40,7 @@
                         {{ $t('voluntarios.form.cpf') }}
                     </div>
                     <div class="field">
-                        <input v-validate="`required|cpf`" name="cpf" type="text" v-mask="'###.###.###-##'" v-model="voluntario_.cpf" />
+                        <input v-validate="`required|cpf|unique-cpf`" name="cpf" type="text" v-mask="'###.###.###-##'" v-model="voluntario_.cpf" />
                         <small>{{ errors.first('cpf') }}</small>
                     </div>
                 </div>
@@ -131,6 +131,8 @@
 
 <script>
 
+import { mapGetters } from 'vuex';
+
 import { Validator  } from 'vee-validate';
 
 function isValidCPF(cpf) {
@@ -165,6 +167,11 @@ Validator.extend('cpf', {
   }
 });
 
+// Validator.extend('unique-cpf', {
+//   getMessage: field => `O CPF ${field} já está cadastrado.`,
+//   validate: value => uniqueCpf(value)
+// });
+
 Validator.extend('phone', {
   validate: value => {
     const regex = /\(\d{2}\) \d{5}-\d{4}$/
@@ -193,12 +200,22 @@ export default {
         }
     },
     computed: {
+        ...mapGetters({
+            voluntarios: 'voluntarios/list'
+        }),
         modalTitle() {
             return this.$t(`voluntarios.modal.title.${this.editing ? 'edit' : 'add'}`);
         }
     },
     created() {
         this.voluntario_.data_cadastro = this.$moment().format('YYYY-MM-DD HH:mm:ss');
+
+        this.$validator.extend('unique-cpf', {
+            getMessage: () => 'Este CPF já está cadastrado.',
+            validate: value => {
+                return !this.voluntarios.some(voluntario => voluntario.cpf === value && voluntario.id !== this.voluntario_.id)
+            }
+        });
     },
     methods: {
         close() {

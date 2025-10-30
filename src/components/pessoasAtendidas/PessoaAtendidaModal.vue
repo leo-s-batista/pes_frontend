@@ -40,7 +40,7 @@
                         {{ $t('pessoasAtendidas.form.cpf') }}
                     </div>
                     <div class="field">
-                        <input v-validate="`cpf`" name="cpf" type="text" v-mask="'###.###.###-##'" v-model="pessoaAtendida_.cpf" />
+                        <input v-validate="`cpf|unique-cpf`" name="cpf" type="text" v-mask="'###.###.###-##'" v-model="pessoaAtendida_.cpf" />
                         <small>{{ errors.first('cpf') }}</small>
                     </div>
                 </div>
@@ -148,6 +148,7 @@
 
 <script>
 
+import { mapGetters } from 'vuex';
 import { Validator  } from 'vee-validate';
 
 function isValidCPF(cpf) {
@@ -213,10 +214,20 @@ export default {
     computed: {
         modalTitle() {
             return this.$t(`pessoasAtendidas.modal.title.${this.editing ? 'edit' : 'add'}`);
-        }
+        },
+        ...mapGetters({
+            pessoasAtendidas: 'pessoasAtendidas/list'
+        })
     },
     created() {
         this.pessoaAtendida_.data_cadastro = this.$moment().format('YYYY-MM-DD HH:mm:ss');
+
+        this.$validator.extend('unique-cpf', {
+            getMessage: () => 'Este CPF já está cadastrado.',
+            validate: value => {
+                return !this.pessoasAtendidas.some(pessoaAtendida => pessoaAtendida.cpf === value && pessoaAtendida.id !== this.pessoaAtendida_.id)
+            }
+        });
     },
     methods: {
         close() {
