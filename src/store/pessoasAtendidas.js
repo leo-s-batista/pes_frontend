@@ -30,8 +30,8 @@ const pessoasAtendidas = {
 
             commit('SET_VOLUNTARIOS', pessoasAtendidas.data);
         },
-        async search({ commit }, { term, order }) {
-            const pessoasAtendidas = await pessoasAtendidas_.search(term, order);
+        async search({ commit }, payload) {
+            const pessoasAtendidas = await pessoasAtendidas_.search(payload);
 
             commit('SET_VOLUNTARIOS', pessoasAtendidas.data);
         },

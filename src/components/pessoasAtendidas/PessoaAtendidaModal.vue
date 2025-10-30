@@ -82,6 +82,15 @@
                 </div>
                 <div class="pessoaAtendida--modal__wrapper--body__row">
                     <div class="label">
+                        {{ $t('pessoasAtendidas.form.endereco') }}
+                    </div>
+                    <div class="field">
+                        <input name="endereco" type="text" v-model="pessoaAtendida_.endereco" />
+                        <small>{{ errors.first('endereco') }}</small>
+                    </div>
+                </div>
+                <div class="pessoaAtendida--modal__wrapper--body__row">
+                    <div class="label">
                         {{ $t('pessoasAtendidas.form.observacoes') }}
                     </div>
                     <div class="field">
@@ -116,9 +125,20 @@
                         <font-awesome-icon icon="circle-notch" spin />
                         <span>Apagando</span>
                     </button>
-                    <button v-else class="danger" @click="remove()">
-                        <font-awesome-icon icon="trash" />
-                        <span>Apagar</span>
+                    <button v-else class="danger">
+                        <el-popconfirm
+                            confirm-button-text='Sim'
+                            cancel-button-text='Cancelar'
+                            icon="el-icon-warning"
+                            icon-color="red"
+                            title="Tem certeza que deseja excluir este registro?"
+                            @confirm="remove()"
+                        >
+                            <div slot="reference">
+                                <font-awesome-icon icon="trash" />
+                                <span>Apagar</span>
+                            </div>
+                        </el-popconfirm>
                     </button>
                     <button v-if="loading.save">
                         <font-awesome-icon icon="circle-notch" spin />
@@ -206,6 +226,7 @@ export default {
                 data_nascimento: '',
                 genero: '',
                 telefone: '',
+                endereco: '',
                 observacoes: '',
                 data_cadastro: ''
             }
@@ -261,6 +282,8 @@ export default {
                         await this.$store.dispatch('pessoasAtendidas/create', pessoaAtendida);
                     }
 
+                    this.$emit('saved');
+
                     this.$notify({
                         title: 'Sucesso',
                         message,
@@ -300,6 +323,7 @@ export default {
     &__wrapper {
         @apply relative bg-white rounded-lg shadow-lg px-10 py-6 w-10/12 grid gap-y-12;
 
+        max-height: 90%;
         width: 450px;
 
         grid-template-rows: auto 1fr auto;
@@ -317,7 +341,7 @@ export default {
             }
         }
         &--body {
-            @apply grid gap-y-4;
+            @apply grid gap-y-4 overflow-auto;
 
             &__row {
                 @apply grid gap-y-1;

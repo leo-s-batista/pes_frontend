@@ -4,8 +4,8 @@ export default {
     all() {
         return api.get('/voluntario');
     },
-    search(term, order) {
-        return api.get(`/voluntario/search?term=${term}&order=${order}`);
+    search(payload) {
+        return api.post(`/voluntario/search`, payload);
     },
     get(id) {
         return api.get(`/voluntario/${id}`);

@@ -71,6 +71,32 @@
                         <small>{{ errors.first('telefone') }}</small>
                     </div>
                 </div>
+                 <div class="voluntario--modal__wrapper--body__row">
+                    <div class="label">
+                        {{ $t('voluntarios.form.data_nascimento') }}
+                    </div>
+                    <div class="field">
+                        <el-date-picker
+                            v-validate="`required`"
+                            name="data_nascimento"
+                            v-model="voluntario_.data_nascimento"
+                            type="date"
+                            format="dd/MM/yyyy"    
+                            value-format="yyyy-MM-dd"
+                        >
+                        </el-date-picker>
+                        <small>{{ errors.first('data_nascimento') }}</small>
+                    </div>
+                </div>
+                <div class="voluntario--modal__wrapper--body__row">
+                    <div class="label">
+                        {{ $t('voluntarios.form.endereco') }}
+                    </div>
+                    <div class="field">
+                        <input v-validate="`required`" name="endereco" type="text" v-model="voluntario_.endereco" />
+                        <small>{{ errors.first('endereco') }}</small>
+                    </div>
+                </div>
                 <div class="voluntario--modal__wrapper--body__row">
                     <div class="label">
                         {{ $t('voluntarios.form.data_cadastro') }}
@@ -100,8 +126,19 @@
                         <span>Apagando</span>
                     </button>
                     <button v-else class="danger" @click="remove()">
-                        <font-awesome-icon icon="trash" />
-                        <span>Apagar</span>
+                        <el-popconfirm
+                            confirm-button-text='Sim'
+                            cancel-button-text='Cancelar'
+                            icon="el-icon-warning"
+                            icon-color="red"
+                            title="Tem certeza que deseja excluir este registro?"
+                            @confirm="remove()"
+                        >
+                            <div slot="reference">
+                                <font-awesome-icon icon="trash" />
+                                <span>Apagar</span>
+                            </div>
+                        </el-popconfirm>
                     </button>
                     <button v-if="loading.save">
                         <font-awesome-icon icon="circle-notch" spin />
@@ -195,6 +232,8 @@ export default {
                 email: '',
                 senha: '',
                 telefone: '',
+                data_nascimento: '',
+                endereco: '',
                 data_cadastro: ''
             }
         }
@@ -253,6 +292,8 @@ export default {
                         await this.$store.dispatch('voluntarios/create', voluntario);
                     }
 
+                    this.$emit('saved');
+
                     this.$notify({
                         title: 'Sucesso',
                         message,
@@ -292,6 +333,7 @@ export default {
     &__wrapper {
         @apply relative bg-white rounded-lg shadow-lg px-10 py-6 w-10/12 grid gap-y-12;
 
+        max-height: 90%;
         width: 450px;
 
         grid-template-rows: auto 1fr auto;
@@ -309,7 +351,7 @@ export default {
             }
         }
         &--body {
-            @apply grid gap-y-4;
+            @apply grid gap-y-4 overflow-auto;
 
             &__row {
                 @apply grid gap-y-1;

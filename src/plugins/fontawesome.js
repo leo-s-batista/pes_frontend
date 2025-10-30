@@ -17,7 +17,8 @@ import {
   faTrash,
   faCircleNotch,
   faEdit,
-  faFilePdf
+  faFilePdf,
+  faFilter
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -33,7 +34,8 @@ library.add(
   faTrash,
   faCircleNotch,
   faEdit,
-  faFilePdf
+  faFilePdf,
+  faFilter
 
 )
 

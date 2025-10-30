@@ -15,14 +15,28 @@
         </div>
         <div class="voluntarios--container__filter">
           <div class="voluntarios--container__filter--order">
+            <span>{{ $t('voluntarios.order_by') }}</span>
             <font-awesome-icon icon="arrow-up-z-a" />
             <select v-model="filter.order">
               <option value="id">ID</option>
               <option value="nome">Nome</option>
               <option value="data_cadastro">Data de Cadastro</option>
             </select>
+            <select v-model="filter.order_mode">
+              <option value="asc">Crescente</option>
+              <option value="desc">Decrescente</option>
+            </select>
           </div>
           <div class="voluntarios--container__filter--search">
+            <span>Filtrar por</span>
+            <font-awesome-icon icon="filter" />
+            <select v-model="filter.column">
+              <option value="nome">Nome</option>
+              <option value="cpf">CPF</option>
+              <option value="email">Email</option>
+              <option value="telefone">Telefone</option>
+              <option value="endereco">Endereço</option>
+            </select>
             <input v-model="filter.term" type="text" :placeholder="$t('voluntarios.search.placeholder')" />
             <button>
               <font-awesome-icon icon="search" />
@@ -53,7 +67,7 @@
     </transition>
 
     <transition name="fade" mode="out-in">
-      <VoluntarioModal ref="modal" v-if="showModal" @close="showModal = false" />
+      <VoluntarioModal ref="modal" v-if="showModal" @close="showModal = false" @saved="voluntarioSaved()" />
     </transition>
 
 
@@ -78,6 +92,8 @@ export default {
       showModal: false,
       filter: {
         order: 'id',
+        order_mode: 'desc',
+        column: 'nome',
         term: ''
       },
       debounce: null
@@ -90,9 +106,9 @@ export default {
     }),
   },
   async created() {
-    this.getVoluntarios().then(() => {
+    this.searchVoluntarios(this.filter).then(() => {
       this.loading = false;
-    });
+    })
   },
   watch: {
     // debounce scheme only for filter.term
@@ -112,13 +128,21 @@ export default {
         this.searchVoluntarios(this.filter);
       },
       deep: true
+    },
+    'filter.order_mode': {
+      handler() {
+        this.searchVoluntarios(this.filter);
+      },
+      deep: true
     }
   },
   methods: {
     ...mapActions({
-      getVoluntarios: 'voluntarios/all',
       searchVoluntarios: 'voluntarios/search'
     }),
+    voluntarioSaved() {
+      this.searchVoluntarios(this.filter);
+    },
     edit(index) {
       this.showModal = true;
       
@@ -165,8 +189,11 @@ export default {
         }
       }
       &--search {
-        @apply grid items-center gap-x-1;
-        grid-template-columns: 1fr auto;
+        @apply text-sm grid items-center gap-x-1;
+        grid-template-columns: auto auto auto 1fr auto;
+        select {
+          @apply  gap-x-1 bg-gray-100 px-3 py-2 rounded-lg shadow-sm outline-none border-none h-full;
+        }
         button {
           @apply h-full;
         }

@@ -30,8 +30,8 @@ const voluntarios = {
 
             commit('SET_VOLUNTARIOS', voluntarios.data);
         },
-        async search({ commit }, { term, order }) {
-            const voluntarios = await voluntarios_.search(term, order);
+        async search({ commit }, payload) {
+            const voluntarios = await voluntarios_.search(payload);
 
             commit('SET_VOLUNTARIOS', voluntarios.data);
         },

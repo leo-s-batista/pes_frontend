@@ -11,7 +11,7 @@
     "voluntarios.add": "Adicionar",
     "voluntarios.order_by": "Ordenar por",
     "voluntarios.search": "Pesquisar",
-    "voluntarios.search.placeholder": "Pesquisar por nome ou CPF",
+    "voluntarios.search.placeholder": "Digite aqui",
 
     "voluntarios.modal.title.add": "Adicionar Voluntário",
     "voluntarios.modal.title.edit": "Editar Voluntário",
@@ -23,12 +23,15 @@
     "voluntarios.form.senha": "Senha",
     "voluntarios.form.telefone": "Telefone",
     "voluntarios.form.data_cadastro": "Data de Cadastro",
+    "voluntarios.form.endereco": "Endereço",
+    "voluntarios.form.data_nascimento": "Data de Nascimento",
+
 
     "pessoasAtendidas.title": "Gerenciar Pessoas Atendidas",
     "pessoasAtendidas.add": "Adicionar",
     "pessoasAtendidas.order_by": "Ordenar por",
     "pessoasAtendidas.search": "Pesquisar",
-    "pessoasAtendidas.search.placeholder": "Pesquisar por nome ou CPF",
+    "pessoasAtendidas.search.placeholder": "Digite aqui",
 
     "pessoasAtendidas.modal.title.add": "Adicionar Pessoa Atendida",
     "pessoasAtendidas.modal.title.edit": "Editar Pessoa Atendida",
@@ -40,5 +43,7 @@
     "pessoasAtendidas.form.genero": "Gênero",
     "pessoasAtendidas.form.telefone": "Telefone",
     "pessoasAtendidas.form.observacoes": "Observações",
-    "pessoasAtendidas.form.data_cadastro": "Data de Cadastro"
+    "pessoasAtendidas.form.data_cadastro": "Data de Cadastro",
+    "pessoasAtendidas.form.endereco": "Endereço"
+
 }

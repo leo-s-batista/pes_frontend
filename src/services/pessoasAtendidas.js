@@ -4,8 +4,8 @@ export default {
     all() {
         return api.get('/pessoa-atendida');
     },
-    search(term, order) {
-        return api.get(`/pessoa-atendida/search?term=${term}&order=${order}`);
+    search(payload) {
+        return api.post(`/pessoa-atendida/search`, payload);
     },
     get(id) {
         return api.get(`/pessoa-atendida/${id}`);

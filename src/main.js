@@ -42,6 +42,12 @@ Validator.localize('pt_BR', {
     },
     data_cadastro: {
       required: 'Informe a Data de Cadastro.'
+    },
+    data_nascimento: {
+      required: 'Informe a Data de Nascimento.'
+    },
+    endereco: {
+      required: 'Informe o Endereço.'
     }
   }
 })
