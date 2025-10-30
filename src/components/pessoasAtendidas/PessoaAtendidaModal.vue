@@ -76,7 +76,7 @@
                         {{ $t('pessoasAtendidas.form.telefone') }}
                     </div>
                     <div class="field">
-                        <input v-mask="'(##) #####-####'" name="telefone" type="text" v-model="pessoaAtendida_.telefone" />
+                        <input v-validate="`phone`" v-mask="'(##) #####-####'" name="telefone" type="text" v-model="pessoaAtendida_.telefone" />
                         <small>{{ errors.first('telefone') }}</small>
                     </div>
                 </div>

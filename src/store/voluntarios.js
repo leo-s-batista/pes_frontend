@@ -10,11 +10,10 @@ const voluntarios = {
     },
     mutations: {
         SET_VOLUNTARIOS(state, value) {
-            console.log('value', value);
             state.list = value;
         },
         ADD_VOLUNTARIO(state, voluntario) {
-            state.list.push(voluntario);
+            state.list.unshift(voluntario);
         },
         UPDATE_VOLUNTARIO(state, voluntario) {
             const index = state.list.findIndex(v => v.id === voluntario.id);
