@@ -4,7 +4,7 @@
             {{ pessoaAtendida.id }}
         </td>
         <td class="pessoaAtendida--item__status">
-            {{ pessoaAtendida.status === 1 ? 'Ativo' : 'Inativo' }}
+            {{ parseInt(pessoaAtendida.status) === 1 ? 'Ativo' : 'Inativo' }}
         </td>
         <td class="pessoaAtendida--item__name">
             {{ pessoaAtendida.nome }}
