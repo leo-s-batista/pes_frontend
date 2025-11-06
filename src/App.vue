@@ -1,10 +1,10 @@
 <template>
   <div class="layout">
-    <CustomMenu />
+    <CustomMenu v-if="showMenu" />
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
-    <CustomFooter />
+    <CustomFooter v-if="showMenu" />
   </div>
 </template>
 
@@ -21,8 +21,11 @@ export default {
     CustomFooter,
   },
   computed: {
-        ...mapGetters(['loading'])
+    ...mapGetters(['loading']),
+    showMenu() {
+      return this.$route.path !== '/login';
     }
+  }
 }
 </script>
 

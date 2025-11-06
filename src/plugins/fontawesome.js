@@ -19,7 +19,10 @@ import {
   faEdit,
   faFilePdf,
   faFilter,
-  faUsersGear
+  faUsersGear,
+  faSignInAlt,
+  faSignOutAlt,
+  faExclamationCircle
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -37,7 +40,10 @@ library.add(
   faEdit,
   faFilePdf,
   faFilter,
-  faUsersGear
+  faUsersGear,
+  faSignInAlt,
+  faSignOutAlt,
+  faExclamationCircle
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

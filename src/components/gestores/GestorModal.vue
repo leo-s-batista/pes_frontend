@@ -49,7 +49,7 @@
                         {{ $t('gestores.form.email') }}
                     </div>
                     <div class="field">
-                        <input v-validate="`required|email`" name="email" type="text" v-model="gestor_.email" />
+                        <input v-validate="`required|email|unique-email`" name="email" type="text" v-model="gestor_.email" />
                         <small>{{ errors.first('email') }}</small>
                     </div>
                 </div>
@@ -169,6 +169,7 @@
 <script>
 
 import { mapGetters } from 'vuex';
+import auth_ from '@/services/auth';
 
 import { Validator  } from 'vee-validate';
 
@@ -253,6 +254,30 @@ export default {
             getMessage: () => 'Este CPF já está cadastrado.',
             validate: value => {
                 return !this.gestores.some(gestor => gestor.cpf === value && gestor.id !== this.gestor_.id)
+            }
+        });
+
+        this.$validator.extend('unique-email', {
+            getMessage: () => 'Este e-mail já está cadastrado.',
+            validate: async (value) => {
+                if (!value) return true;
+                
+                try {
+                    const payload = {
+                        email: value
+                    };
+                    
+                    if (this.editing && this.gestor_.id) {
+                        payload.exclude_id = this.gestor_.id;
+                        payload.exclude_tipo = 'gestor';
+                    }
+                    
+                    const response = await auth_.checkEmail(payload);
+                    return !response.data.exists;
+                } catch (error) {
+                    console.error('Error checking email:', error);
+                    return true; // Allow if API fails to avoid blocking user
+                }
             }
         });
     },

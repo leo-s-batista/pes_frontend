@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import voluntarios from './voluntarios';
 import pessoasAtendidas from './pessoasAtendidas';
 import gestores from './gestores';
+import auth from './auth';
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
    modules: {
       voluntarios,
       pessoasAtendidas,
-      gestores
+      gestores,
+      auth
    }
 });
