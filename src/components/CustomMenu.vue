@@ -21,7 +21,7 @@ export default {
     name: 'CustomMenu',
     data() {
         return {
-            routes: ['home', 'voluntarios', 'pessoas_atendidas']
+            routes: ['home', 'voluntarios', 'pessoas_atendidas', 'gestores']
         }
     },
     computed: {

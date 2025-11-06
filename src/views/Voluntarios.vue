@@ -36,8 +36,14 @@
               <option value="email">Email</option>
               <option value="telefone">Telefone</option>
               <option value="endereco">Endereço</option>
+              <option value="status">Status</option>
             </select>
-            <input v-model="filter.term" type="text" :placeholder="$t('voluntarios.search.placeholder')" />
+            <input v-if="filter.column !== 'status'" v-model="filter.term" type="text" :placeholder="$t('voluntarios.search.placeholder')" />
+            <select v-else v-model="filter.term" class="status-select">
+              <option value="">Todos</option>
+              <option value="1">Ativo</option>
+              <option value="0">Inativo</option>
+            </select>
             <button>
               <font-awesome-icon icon="search" />
               <span>{{ $t('voluntarios.search') }}</span>
@@ -134,6 +140,11 @@ export default {
         this.searchVoluntarios(this.filter);
       },
       deep: true
+    },
+    'filter.column': {
+      handler() {
+        this.filter.term = '';
+      }
     }
   },
   methods: {
@@ -191,8 +202,12 @@ export default {
       &--search {
         @apply text-sm grid items-center gap-x-1;
         grid-template-columns: auto auto auto 1fr auto;
-        select {
+        select:not(.status-select) {
           @apply  gap-x-1 bg-gray-100 px-3 py-2 rounded-lg shadow-sm outline-none border-none h-full;
+        }
+        input, select.status-select {
+          @apply px-3 py-2 rounded-lg shadow-sm bg-transparent outline-none w-full;
+          border: 1px solid #ccc;
         }
         button {
           @apply h-full;

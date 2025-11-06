@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Home from '/src/views/Home'
 import Voluntarios from '/src/views/Voluntarios'
 import PessoasAtendidas from '/src/views/PessoasAtendidas'
+import Gestor from '/src/views/Gestor'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
     path: '/pessoas-atendidas',
     name: 'pessoas-atendidas',
     component: PessoasAtendidas
+  },
+  {
+    path: '/gestores',
+    name: 'gestores',
+    component: Gestor
   }
 ]
 

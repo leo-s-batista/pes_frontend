@@ -1,45 +1,44 @@
 <template>
-  <section class="pessoasAtendidas">
+  <section class="gestores">
     <transition name="fade" mode="out-in">
-      <div v-if="loading" class="pessoasAtendidas--loading">
+      <div v-if="loading" class="gestores--loading">
         <font-awesome-icon icon="circle-notch" spin />
       </div>
-      <div v-else class="pessoasAtendidas--container">
-        <div class="pessoasAtendidas--container__title">
-          <font-awesome-icon :icon="routeIcon.pessoas_atendidas" />
-          <span>{{ $t('pessoasAtendidas.title') }}</span>
+      <div v-else class="gestores--container">
+        <div class="gestores--container__title">
+          <font-awesome-icon :icon="routeIcon.gestores" />
+          <span>{{ $t('gestores.title') }}</span>
           <button @click="showModal = true">
             <font-awesome-icon icon="plus" />
-            <span>{{ $t('pessoasAtendidas.add') }}</span>
+            <span>{{ $t('gestores.add') }}</span>
           </button>
         </div>
-        <div class="pessoasAtendidas--container__filter">
-          <div class="pessoasAtendidas--container__filter--order">
-            <span>{{ $t('pessoasAtendidas.order_by') }}</span>
+        <div class="gestores--container__filter">
+          <div class="gestores--container__filter--order">
+            <span>{{ $t('gestores.order_by') }}</span>
             <font-awesome-icon icon="arrow-up-z-a" />
             <select v-model="filter.order">
               <option value="id">ID</option>
               <option value="nome">Nome</option>
               <option value="data_cadastro">Data de Cadastro</option>
             </select>
-            <select v-model="filter.order_mode">  
+            <select v-model="filter.order_mode">
               <option value="asc">Crescente</option>
               <option value="desc">Decrescente</option>
             </select>
           </div>
-          <div class="pessoasAtendidas--container__filter--search">
+          <div class="gestores--container__filter--search">
             <span>Filtrar por</span>
             <font-awesome-icon icon="filter" />
-             <select v-model="filter.column">
-                <option value="nome">Nome</option>
-                <option value="cpf">CPF</option>
-                <option value="genero">Gênero</option>
-                <option value="telefone">Telefone</option>
-                <option value="observacoes">Observações</option>
-                <option value="endereco">Endereço</option>
-                <option value="status">Status</option>
-              </select>
-            <input v-if="filter.column !== 'status'" v-model="filter.term" type="text" :placeholder="$t('pessoasAtendidas.search.placeholder')" />
+            <select v-model="filter.column">
+              <option value="nome">Nome</option>
+              <option value="cpf">CPF</option>
+              <option value="email">Email</option>
+              <option value="telefone">Telefone</option>
+              <option value="endereco">Endereço</option>
+              <option value="status">Status</option>
+            </select>
+            <input v-if="filter.column !== 'status'" v-model="filter.term" type="text" :placeholder="$t('gestores.search.placeholder')" />
             <select v-else v-model="filter.term" class="status-select">
               <option value="">Todos</option>
               <option value="1">Ativo</option>
@@ -47,34 +46,34 @@
             </select>
             <button>
               <font-awesome-icon icon="search" />
-              <span>{{ $t('pessoasAtendidas.search') }}</span>
+              <span>{{ $t('gestores.search') }}</span>
             </button>
           </div>
         </div>
-        <table class="pessoasAtendidas--container__list">
-          <tr class="pessoasAtendidas--container__list--item">
+        <table class="gestores--container__list">
+          <tr class="gestores--container__list--item">
             <td>ID</td>
             <td>Status</td>
             <td>Nome</td>
             <td>CPF</td>
-            <td>Data de Nascimento</td>
+            <td>Email</td>
             <td>Telefone</td>
             <td>Data de Cadastro</td>
             <td>Ações</td>
           </tr>
-          <tr v-if="pessoasAtendidas.length === 0" class="pessoasAtendidas--container__list--empty">
+          <tr v-if="gestores.length === 0" class="gestores--container__list--empty">
             <td colspan="8">
               Nenhum registro encontrado.
             </td>
           </tr>
-          <PessoaAtendidaItem v-for="(pessoaAtendida, index) in pessoasAtendidas" :key="`pessoaAtendida-${pessoaAtendida.id}`" :pessoaAtendida="pessoaAtendida"  @edit="edit(index)" @remove="remove(pessoaAtendida.id)" />
+          <GestorItem v-for="(gestor, index) in gestores" :key="`gestor-${gestor.id}`" :gestor="gestor"  @edit="edit(index)" />
         </table>
       </div>
 
     </transition>
 
     <transition name="fade" mode="out-in">
-      <PessoaAtendidaModal ref="modal" v-if="showModal" @close="showModal = false" @saved="pessoaAtendidaSaved()" />
+      <GestorModal ref="modal" v-if="showModal" @close="showModal = false" @saved="gestorSaved()" />
     </transition>
 
 
@@ -84,14 +83,14 @@
 <script>
 
 import { mapActions, mapGetters } from 'vuex';
-import PessoaAtendidaItem from '@/components/pessoasAtendidas/PessoaAtendidaItem.vue';
-import PessoaAtendidaModal from '@/components/pessoasAtendidas/PessoaAtendidaModal.vue';
+import GestorItem from '@/components/gestores/GestorItem.vue';
+import GestorModal from '@/components/gestores/GestorModal.vue';
 
 export default {
-  name: 'pessoasAtendidas',
+  name: 'gestores',
   components: {
-    PessoaAtendidaItem,
-    PessoaAtendidaModal
+    GestorItem,
+    GestorModal
   },
   data() {
     return {
@@ -108,12 +107,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      pessoasAtendidas: 'pessoasAtendidas/list',
+      gestores: 'gestores/list',
       routeIcon: 'routeIcon'
     }),
   },
   async created() {
-    this.searchPessoasAtendidas(this.filter).then(() => {
+    this.searchGestores(this.filter).then(() => {
       this.loading = false;
     })
   },
@@ -125,20 +124,20 @@ export default {
           clearTimeout(this.debounce);
         }
         this.debounce = setTimeout(() => {
-          this.searchPessoasAtendidas(this.filter);
+          this.searchGestores(this.filter);
         }, 100);
       },
       deep: true
     },
     'filter.order': {
       handler() {
-        this.searchPessoasAtendidas(this.filter);
+        this.searchGestores(this.filter);
       },
       deep: true
     },
     'filter.order_mode': {
       handler() {
-        this.searchPessoasAtendidas(this.filter);
+        this.searchGestores(this.filter);
       },
       deep: true
     },
@@ -150,16 +149,16 @@ export default {
   },
   methods: {
     ...mapActions({
-      searchPessoasAtendidas: 'pessoasAtendidas/search'
+      searchGestores: 'gestores/search'
     }),
-    pessoaAtendidaSaved() {
-      this.searchPessoasAtendidas(this.filter);
+    gestorSaved() {
+      this.searchGestores(this.filter);
     },
     edit(index) {
       this.showModal = true;
       
       this.$nextTick(() => {
-        this.$refs.modal.edit(this.pessoasAtendidas[index]);
+        this.$refs.modal.edit(this.gestores[index]);
       })
     }
   },
@@ -169,7 +168,7 @@ export default {
 </script>
 
 <style lang="scss">
-.pessoasAtendidas {
+.gestores {
   &--loading {
     @apply flex justify-center pt-20;
     svg {
@@ -201,7 +200,7 @@ export default {
         }
       }
       &--search {
-        @apply text-sm grid items-center gap-x-2;
+        @apply text-sm grid items-center gap-x-1;
         grid-template-columns: auto auto auto 1fr auto;
         select:not(.status-select) {
           @apply  gap-x-1 bg-gray-100 px-3 py-2 rounded-lg shadow-sm outline-none border-none h-full;
@@ -238,3 +237,4 @@ export default {
   }
 }
 </style>
+

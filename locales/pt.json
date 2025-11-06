@@ -2,10 +2,12 @@
     "routes.home": "/",
     "routes.voluntarios": "/voluntarios",
     "routes.pessoas_atendidas": "/pessoas-atendidas",
+    "routes.gestores": "/gestores",
 
     "navbar.home": "Home",
     "navbar.voluntarios": "Voluntários",
     "navbar.pessoas_atendidas": "Pessoas atendidas",
+    "navbar.gestores": "Gestores",
 
     "voluntarios.title": "Gerenciar Voluntários",
     "voluntarios.add": "Adicionar",
@@ -44,6 +46,25 @@
     "pessoasAtendidas.form.telefone": "Telefone",
     "pessoasAtendidas.form.observacoes": "Observações",
     "pessoasAtendidas.form.data_cadastro": "Data de Cadastro",
-    "pessoasAtendidas.form.endereco": "Endereço"
+    "pessoasAtendidas.form.endereco": "Endereço",
+
+    "gestores.title": "Gerenciar Gestores",
+    "gestores.add": "Adicionar",
+    "gestores.order_by": "Ordenar por",
+    "gestores.search": "Pesquisar",
+    "gestores.search.placeholder": "Digite aqui",
+
+    "gestores.modal.title.add": "Adicionar Gestor",
+    "gestores.modal.title.edit": "Editar Gestor",
+
+    "gestores.form.status": "Status",
+    "gestores.form.nome": "Nome",
+    "gestores.form.cpf": "CPF",
+    "gestores.form.email": "Email",
+    "gestores.form.senha": "Senha",
+    "gestores.form.telefone": "Telefone",
+    "gestores.form.data_cadastro": "Data de Cadastro",
+    "gestores.form.endereco": "Endereço",
+    "gestores.form.data_nascimento": "Data de Nascimento"
 
 }

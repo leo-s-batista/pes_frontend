@@ -18,7 +18,8 @@ import {
   faCircleNotch,
   faEdit,
   faFilePdf,
-  faFilter
+  faFilter,
+  faUsersGear
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -35,8 +36,8 @@ library.add(
   faCircleNotch,
   faEdit,
   faFilePdf,
-  faFilter
-
+  faFilter,
+  faUsersGear
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
